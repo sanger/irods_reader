@@ -1,6 +1,10 @@
 # IrodsReader
 
-Provides an easy interface for interacting with the Sanger iRods service
+Provides an easy interface for interacting with the Sanger iRods service.
+
+This gem provides a wrapper for the iRods command line interface. It is a fairly
+minimal implementation, primarily designed for the retrieval of sequence information
+from the Sanger iRods service.
 
 ## Installation
 
@@ -16,13 +20,15 @@ Or install it yourself as:
 
     $ gem install irods_reader
 
+Ensure an iRods service is configured with appropriate permissions for the account under which your application is running.
+
 ## Usage
 
-Find and retrieve iRods records
-records = IRods.find(:metafield=>value)
+Find and retrieve iRods records:
+records = IrodsReader::DataObj.find(zone,{:attribute=>value})
 
-Retrieve the associated file
-file = records.first.retrieve
+Retrieve the associated file:
+records.first.retrieve
 
 ## Contributing
 
