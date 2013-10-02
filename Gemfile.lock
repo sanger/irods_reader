@@ -18,6 +18,7 @@ GEM
     rspec-mocks (2.11.3)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES

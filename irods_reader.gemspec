@@ -8,8 +8,15 @@ Gem::Specification.new do |gem|
   gem.version       = IrodsReader::VERSION
   gem.authors       = ["James Glover"]
   gem.email         = ["jg16@sanger.ac.uk"]
-  gem.description   = %q{Provides an easy interface for interacting with the Sanger iRods service}
-  gem.summary       = %q{Provides a ruby interface for search and retrival of files from the Snager iRods database}
+  gem.description   = %q{Provides an easy interface for interacting with the iRods service}
+  gem.summary       = %q{
+    Provides a ruby interface for search and retrieval of files from an iRods database.
+    It acts as a simple wrapper for the command line interface, and is written primarily
+    for interacting with the implementation used at the Sanger.
+
+    This gem is not fully-featured, and is a minimal implementation to meet the requirements
+    of the Sequencescape project.
+  }
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
