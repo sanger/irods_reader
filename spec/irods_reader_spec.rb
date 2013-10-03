@@ -132,12 +132,13 @@ dataObj: 1000_6.file
 
   context 'when no records are found' do
     let (:expected_command) { "imeta qu -z test -d metadata = 'value'" }
-    let (:expected_return)  { 'No rows found' }
+    let (:expected_return)  { "No rows found\n" }
 
     let (:zone)     { 'test' }
     let (:metadata) { {'metadata' => 'value' } }
 
     it 'returns an empty array' do
+      should_talk_to_irods
       IrodsReader::DataObj.find(zone,metadata).should eq([])
     end
 

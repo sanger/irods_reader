@@ -19,7 +19,10 @@ class IrodsReader::ImetaQuery
   end
 
   def query
-    IrodsReader.command(%Q{imeta qu -z #{zone} -#{@type} #{meta_string}}).split("\n----\n")
+    # TODO: handle this with exit codes if possible
+    q = IrodsReader.command(%Q{imeta qu -z #{zone} -#{@type} #{meta_string}})
+    return [] if q == "No rows found\n"
+    q.split("\n----\n")
   end
 
 end
