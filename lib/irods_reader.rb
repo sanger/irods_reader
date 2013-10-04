@@ -8,12 +8,15 @@ module IrodsReader
 
   class InvalidCommand < StandardError; end
   class InvalidInput < StandardError; end
+  class IrodsError < StandardError; end
 
   class << self
     def command(command)
       # Avoids the need of mocking the Kernal, and ensures use a single point of communication.
       raise InvalidCommand, 'Invalid input detected' unless valid?(command)
-      `#{command}`
+      `#{command}`.tap do |result|
+        raise IrodsError, "iRods failed with code #{$?.stopsig}: #{result})" unless $?.success?
+      end
     end
 
     def valid?(command)
