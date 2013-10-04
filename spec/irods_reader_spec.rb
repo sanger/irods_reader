@@ -30,7 +30,17 @@ describe IrodsReader do
   end
 
   context "sneaky injection attempts" do
-    let (:expected_command) { %Q{imeta qu -z test -d metaadata = 'val';echo 'boo'} }
+    let (:expected_command) { %Q{imeta -z test qu -d metaadata = 'val';echo 'boo'} }
+    it_behaves_like "an illegal command"
+  end
+
+  context "another sneaky injection attempts" do
+    let (:expected_command) { %Q{imeta -z test qu -d metaadata = 'val'|echo 'boo'} }
+    it_behaves_like "an illegal command"
+  end
+
+  context "backtick injection attempts" do
+    let (:expected_command) { %Q{imeta -z test qu -d metaadata = 'val`echo 'boo'`'} }
     it_behaves_like "an illegal command"
   end
 
@@ -67,7 +77,7 @@ dataObj: 1000_6.file
 
   context 'with given zone and metadata' do
 
-    let (:expected_command) { "imeta qu -z test -d metadata = 'value'" }
+    let (:expected_command) { "imeta -z test qu -d metadata = 'value'" }
     let (:expected_return)  { '' }
 
     let (:zone)     { 'test' }
@@ -78,7 +88,7 @@ dataObj: 1000_6.file
   end
 
   context 'with given zone and multiple metadata' do
-    let (:expected_command) { "imeta qu -z test -d metadata = 'value' and other_metadata = 'value_2'" }
+    let (:expected_command) { "imeta -z test qu -d metadata = 'value' and other_metadata = 'value_2'" }
     let (:expected_return)  { '' }
 
     let (:zone)     { 'test' }
@@ -88,7 +98,7 @@ dataObj: 1000_6.file
   end
 
   context 'also accepts symbols' do
-    let (:expected_command) { "imeta qu -z test -d metadata = 'value' and other_metadata = 'value_2'" }
+    let (:expected_command) { "imeta -z test qu -d metadata = 'value' and other_metadata = 'value_2'" }
     let (:expected_return)  { '' }
 
     let (:zone)     { 'test' }
@@ -131,7 +141,7 @@ dataObj: 1000_6.file
   end
 
   context 'when no records are found' do
-    let (:expected_command) { "imeta qu -z test -d metadata = 'value'" }
+    let (:expected_command) { "imeta -z test qu -d metadata = 'value'" }
     let (:expected_return)  { "No rows found\n" }
 
     let (:zone)     { 'test' }
