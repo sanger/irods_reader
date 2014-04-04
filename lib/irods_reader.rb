@@ -20,11 +20,10 @@ module IrodsReader
     end
 
     def valid?(command)
-      return false if /[;\n]/ === command
+      return false if /[;\n`|&><]/ === command
       /^imeta|iget/ === command
     end
     private :valid?
   end
-
 
 end
