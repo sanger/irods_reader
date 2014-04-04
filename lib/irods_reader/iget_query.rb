@@ -6,7 +6,7 @@ class IrodsReader::IgetQuery
   end
 
   def set_filename(file_path)
-    raise IrodsReader::InvalidInput unless /^[A-z0-9_\/\.]*$/===file_path
+    raise IrodsReader::InvalidInput unless /^[A-z0-9_\/\.#]*$/===file_path
     @file_path = file_path
   end
   private :set_filename
